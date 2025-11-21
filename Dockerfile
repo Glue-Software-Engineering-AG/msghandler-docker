@@ -1,6 +1,6 @@
-FROM amazoncorretto:8u432-alpine3.20-jre
+FROM bellsoft/liberica-runtime-container:jre-17.0.17-glibc
 
-LABEL org.opencontainers.image.authors="Glue Software Engineering AG <support@fenceit.ch>"
+LABEL org.opencontainers.image.authors="Glue AG <support@fenceit.ch>"
 
 # Installation dir of msghandler
 ARG MSGHANDLER_INSTALL_DIR="/opt/msghandler"
@@ -13,14 +13,10 @@ EXPOSE 18080
 
 COPY apps/open-egov-msghandler-*-linux-x86-64.tar.gz $MSGHANDLER_INSTALL_DIR/
 
-RUN \
+RUN set -ex && \
     # Install additional packages \
-    apk update && apk add --no-cache --upgrade \
-    bash \
-    gcompat \
-    tzdata && \
-    # Create installation directory \
-    mkdir -p "$MSGHANDLER_INSTALL_DIR" && \
+    apk update && apk add --no-cache --upgrade bash tzdata && \
+    # The installation directory has been created by COPY above \
     cd  "$MSGHANDLER_INSTALL_DIR" && \
     # extract distro \
     tar -zxvf open-egov-msghandler-*-linux-x86-64.tar.gz && \
@@ -56,5 +52,10 @@ RUN \
 
 WORKDIR $MSGHANDLER_INSTALL_DIR/current
 
+USER nobody
+
 # Start MH
 ENTRYPOINT ["./bin/message-handler","docker-console"]
+
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+   CMD wget http://localhost:18080/message-handler/ping?type=minimal -q -O /dev/null || exit 1
