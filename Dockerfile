@@ -1,9 +1,19 @@
 FROM bellsoft/liberica-runtime-container:jre-17.0.17-glibc
 
-LABEL org.opencontainers.image.authors="Glue AG <support@fenceit.ch>"
-
+ARG BUILD_DATE
+ARG VERSION
 # Installation dir of msghandler
 ARG MSGHANDLER_INSTALL_DIR="/opt/msghandler"
+
+LABEL \
+    maintainer="Glue AG <support@fenceit.ch>" \
+    org.opencontainers.image.authors="Glue AG <support@fenceit.ch>" \
+    org.opencontainers.image.title="Open eGov MessageHandler" \
+    org.opencontainers.image.version=${VERSION} \
+    org.opencontainers.image.source="https://github.com/Glue-Software-Engineering-AG/msghandler-docker" \
+    org.opencontainers.image.licenses="GPL3" \
+    org.opencontainers.image.created=${BUILD_DATE}
+
 
 # set correct Timezone
 ENV TZ=Europe/Zurich

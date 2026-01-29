@@ -21,7 +21,7 @@ The docker images are available on
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/msghandler:mh-1.0.3
+docker pull gluech/msghandler:mh-1.1.0
 ```
 
 ## How to test drive MH?
