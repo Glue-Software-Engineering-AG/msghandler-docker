@@ -11,7 +11,12 @@ This Docker image should be used in conjunction with the
 
 To build the Docker image locally for development
 
-docker build . --file Dockerfile --tag gluech/msghandler:dev
+```
+docker build \
+--build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+--build-arg BUILD_VERSION="develop" \
+--tag gluech/msghandler:dev .
+```
 
 ## Usage
 

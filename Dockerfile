@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-runtime-container:jre-17.0.17-glibc
 
 ARG BUILD_DATE
-ARG VERSION
+ARG BUILD_VERSION
 # Installation dir of msghandler
 ARG MSGHANDLER_INSTALL_DIR="/opt/msghandler"
 
@@ -9,7 +9,8 @@ LABEL \
     maintainer="Glue AG <support@fenceit.ch>" \
     org.opencontainers.image.authors="Glue AG <support@fenceit.ch>" \
     org.opencontainers.image.title="Open eGov MessageHandler" \
-    org.opencontainers.image.version=${VERSION} \
+    org.opencontainers.image.description="Open eGov MessageHandler allows for sedex message dispatching through a single adapter." \
+    org.opencontainers.image.version=${BUILD_VERSION} \
     org.opencontainers.image.source="https://github.com/Glue-Software-Engineering-AG/msghandler-docker" \
     org.opencontainers.image.licenses="GPL3" \
     org.opencontainers.image.created=${BUILD_DATE}
@@ -32,7 +33,7 @@ RUN set -ex && \
     tar -zxvf open-egov-msghandler-*-linux-x86-64.tar.gz && \
     # clean up \
     rm open-egov-msghandler-*-linux-x86-64.tar.gz  && \
-    # create symbolic link 'current'
+    # create symbolic link 'current' \
     ln -s open-egov-msghandler-* current  && \
     # remove example config file. We will use the config file mounted from host \
     rm /opt/msghandler/current/conf/config.xml && \
