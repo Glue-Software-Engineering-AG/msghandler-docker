@@ -11,17 +11,22 @@ This Docker image should be used in conjunction with the
 
 To build the Docker image locally for development
 
-docker build . --file Dockerfile --tag gluech/msghandler:dev
+```
+docker build \
+--build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+--build-arg BUILD_VERSION="develop" \
+--tag gluech/msghandler:dev .
+```
 
 ## Usage
 
 The docker images are available on 
-[Glue Software Engineering AG - MessageHandler Images](https://hub.docker.com/repository/docker/gluech/msghandler/)
+[Glue AG - MessageHandler Images](https://hub.docker.com/repository/docker/gluech/msghandler/)
 
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/mh:1.0.3
+docker pull gluech/msghandler:1.1.1
 ```
 
 ## How to test drive MH?
@@ -36,14 +41,14 @@ docker compose up -d
 
 The MH container will start up. All files and directories it needs are located underneath the directory `host-folders`.
 
-| Directory | Description |
-| --------- | ----------- |
-| host-folders/conf | MH configuration relative to `host-folders` |
-| host-folders/log | MH log files |
-| host-folders/sedex/interface | sedex interface direcories |
-| host-folders/mh/ech-0112 | sample inbox, outbox and receipts directories of transparent (aka sedex) application |
-| host-folders/mh/eschkg | sample inbox, outbox and signing-outbox directories of native (aka eSchKG/eLP) application |
-| host-folders/mh/working | Working directories of MH |
+| Directory                    | Description                                                                                |
+|------------------------------|--------------------------------------------------------------------------------------------|
+| host-folders/conf            | MH configuration relative to `host-folders`                                                |
+| host-folders/log             | MH log files                                                                               |
+| host-folders/sedex/interface | sedex interface direcories                                                                 |
+| host-folders/mh/ech-0112     | sample inbox, outbox and receipts directories of transparent (aka sedex) application       |
+| host-folders/mh/eschkg       | sample inbox, outbox and signing-outbox directories of native (aka eSchKG/eLP) application |
+| host-folders/mh/working      | Working directories of MH                                                                  |
 
 Use the configuration and directory structure underneath the directory `host-folders` as a model for your own
 deployments.
@@ -51,13 +56,15 @@ deployments.
 ## Docker hub tags
 
 
-| Tag      | Description                                                  | Release date |
-|----------|--------------------------------------------------------------|--------------|
-| mh-1.0.3 | MessageHandler 3.4.5, Amazon Corretto JRE 8u432, Alpine 3.20 | 2024-11-12   |
-| mh-1.0.2 | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19 | 2024-04-12   |
-| mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18 | 2023-07-27   |
-| mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17 | 2023-06-01   |
-| dev      | Development version. Do not use for production               |              |
+| Tag      | Description                                                           | Release date |
+|----------|-----------------------------------------------------------------------|--------------|
+| 1.1.1    | MessageHandler 3.5.2, Bellsoft Liberica JRE 17.0.19, Alpaquita Stream | 2026-07-28   |
+| 1.1.0    | MessageHandler 3.5.1, Bellsoft Liberica JRE 17.0.17, Alpaquita Stream | 2026-01-29   |
+| mh-1.0.3 | MessageHandler 3.4.5, Amazon Corretto JRE 8u432, Alpine 3.20          | 2024-11-12   |
+| mh-1.0.2 | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19          | 2024-04-12   |
+| mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18          | 2023-07-27   |
+| mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17          | 2023-06-01   |
+| dev      | Development version. Do not use for production                        |              |
 
 ## Why does the tag latest not exist?
 
@@ -68,16 +75,10 @@ about the different versions and tags of the Docker image, see above.
 
 ## Known Vulnerabilities
 
-As of April 2024 the vulnerability check of Docker Hub reports vulnerabilities with a CVSS Score > 7 in the following 
-Java libraries used by MessageHandler 3.4.5:
+As of July 2026 no vulnerabilities with a CVSS Score >= 7 are known.
 
-* commons-beanutils/commons-beanutils 1.8.3
-* commons-i0/commons-io 2.6
-* org.apache.santuario/xmlsec 2.0.7
-* org.bouncycastle/bcprov-jdk150n 1.59
-* org.verapdf/core 1.10.2
-
-Due to dependencies in the MessageHandler code, we cannot update the vulnerable libraries to newer versions.
-However, we have analysed the situation in detail and have come to the conclusion that the reported vulnerabilities in 
-MessageHandler will not affect the secure operation of MessageHandler in any way, as under normal conditions
-MessageHandler is not exposed to the Internet. 
+| CVE-ID                | Severity |
+|-----------------------|---------|
+| CVE-2026-59889        | 6.5     |
+| GHSA-mhm7-754n-r9p8w  | 6.5     |
+| CVE-2026-54515        | 5.3     |

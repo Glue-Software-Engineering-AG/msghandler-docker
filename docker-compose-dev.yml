@@ -8,7 +8,7 @@ services:
     image: gluech/msghandler:dev
     container_name: messagehandler
     #restart: unless-stopped
-    user: 10003:20002
+    #user: YOURUSER:YOURGROUP
     volumes:
       # https://github.com/gliderlabs/docker-alpine/issues/136
       - /etc/localtime:/etc/localtime:ro
