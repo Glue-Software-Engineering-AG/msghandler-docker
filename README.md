@@ -26,7 +26,7 @@ The docker images are available on
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/msghandler:1.1.0
+docker pull gluech/msghandler:1.1.1
 ```
 
 ## How to test drive MH?
@@ -56,14 +56,15 @@ deployments.
 ## Docker hub tags
 
 
-| Tag        | Description                                                           | Release date |
-|------------|-----------------------------------------------------------------------|--------------|
-| 1.1.0      | MessageHandler 3.5.1, Bellsoft Liberica JRE 17.0.17, Alpaquita Stream | 2026-01-29   |
-| mh-1.0.3   | MessageHandler 3.4.5, Amazon Corretto JRE 8u432, Alpine 3.20          | 2024-11-12   |
-| mh-1.0.2   | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19          | 2024-04-12   |
-| mh-1.0.1   | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18          | 2023-07-27   |
-| mh-1.0.0   | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17          | 2023-06-01   |
-| dev        | Development version. Do not use for production                        |              |
+| Tag      | Description                                                           | Release date |
+|----------|-----------------------------------------------------------------------|--------------|
+| 1.1.1    | MessageHandler 3.5.2, Bellsoft Liberica JRE 17.0.19, Alpaquita Stream | 2026-07-28   |
+| 1.1.0    | MessageHandler 3.5.1, Bellsoft Liberica JRE 17.0.17, Alpaquita Stream | 2026-01-29   |
+| mh-1.0.3 | MessageHandler 3.4.5, Amazon Corretto JRE 8u432, Alpine 3.20          | 2024-11-12   |
+| mh-1.0.2 | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19          | 2024-04-12   |
+| mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18          | 2023-07-27   |
+| mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17          | 2023-06-01   |
+| dev      | Development version. Do not use for production                        |              |
 
 ## Why does the tag latest not exist?
 
@@ -74,4 +75,10 @@ about the different versions and tags of the Docker image, see above.
 
 ## Known Vulnerabilities
 
-As of January 2026 no vulnerabilities with a CVSS Score >= 7 are known.
+As of July 2026 no vulnerabilities with a CVSS Score >= 7 are known.
+
+| CVE-ID                | Severity |
+|-----------------------|---------|
+| CVE-2026-59889        | 6.5     |
+| GHSA-mhm7-754n-r9p8w  | 6.5     |
+| CVE-2026-54515        | 5.3     |
