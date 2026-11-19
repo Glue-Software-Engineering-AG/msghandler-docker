@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-runtime-container:jre-17.0.19-glibc
+FROM bellsoft/liberica-runtime-container:jre-17.0.21.1-glibc
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
